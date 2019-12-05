@@ -10,7 +10,6 @@ library(msmsTests)
 library(xlsx)
 library(magrittr)
 
-#the following analysis is according to https://rpubs.com/ge600/deseq2 -----------
 #Build DESeq Matrix---------------------------------------------------
 dds_final <- DESeqDataSetFromMatrix(countData = Count_adult2, 
                                           colData = data_adult,
@@ -34,7 +33,7 @@ res <- res[order(res$padj),] # sort
 summary(res)
 
 #plot of the most significant gene in above comparison. ie. Xist
-barplot(assay(dds_final)[ix,],las=2, main=rownames(dds_final)[ ix  ]  )
+#barplot(assay(dds_final)[ix,],las=2, main=rownames(dds_final)[ ix  ]  )
 
 ###The effect of gender in HET mice. (HET: Male vs. Female)
 res_HET <- results(dds_final, list( c("Gender_Female_vs_Male","GenderFemale.GenotypeHET") ), alpha = 0.05)
@@ -133,9 +132,6 @@ Akt_raw <- Count_adult2[akt_isoforms, ]
 #Akt1_raw <- Count_adult2["Akt1", ]
 write.xlsx(as.data.frame(Akt_raw),
            file="C:/Users/Tzu-Ping Lee/Desktop/RNA_analysis/DESeq2 analysis/Akt_raw.xlsx")
-
-#DRD2 raw
-drd2_raw <- Count_adult2["D2dr", ]
 
 ## Data visualization------------------------------------- 
 ################################
